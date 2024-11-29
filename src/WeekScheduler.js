@@ -14,12 +14,14 @@ class WeekScheduler {
   get coaches() {
     return this.#coaches;
   }
+  get weekCategories() {
+    return this.#weekCategories;
+  }
   checkHasSameTwoCategory(tempCategory) {
     const sameCategoryArr = this.#weekCategories.filter(
       (category) => category === tempCategory
     );
-    Console.print(this.#weekCategories);
-    Console.print(sameCategoryArr);
+
     if (sameCategoryArr.length >= 2) {
       return true;
     }
@@ -28,6 +30,9 @@ class WeekScheduler {
   recommendFive() {
     for (let i = 0; i < 5; i++) {
       const category = this.recommendCategory();
+
+      this.#weekCategories.push(category);
+
       this.recommendMenu(category);
     }
     //각 코치객체에 메뉴에 5개가 저장되어야함
@@ -62,14 +67,20 @@ class WeekScheduler {
     return this.#weekCategories;
   }
   getCategory() {
-    const index = Random.pickNumberInRange(0, 4);
-    return CATEGORY[index];
+    const index = Random.pickNumberInRange(1, 5);
+    const newIndex = index - 1;
+    return CATEGORY[newIndex];
   }
 
   getMenu(category) {
     const menus = getMenuArr(category);
-    const menu = Random.shuffle(menus)[0];
-    return menu;
+    const indexNumberArr = menus.map((menu, index) => index);
+    Console.print(indexNumberArr);
+    const shuffleindex = Random.shuffle(indexNumberArr);
+    Console.print(shuffleindex);
+    const firstIndex = shuffleindex[0];
+    Console.print(menus[firstIndex]);
+    return menus[firstIndex - 1];
   }
 }
 

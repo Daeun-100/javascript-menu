@@ -21,8 +21,9 @@ class Controller {
     }
     //5번 추천
     weekScheduler.recommendFive();
+    const weekCategories = weekScheduler.weekCategories;
     //결과 출력
-    OutputView.printResult(weekScheduler.coaches);
+    OutputView.printResult(weekScheduler.coaches, weekCategories);
   }
 }
 

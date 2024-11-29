@@ -1,6 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 const { CATEGORY } = require("../src/Constants.js");
-const getMenuArr = require("./utils/getMenuArr.js");
+const { getMenuArr } = require("./utils/getMenuArr.js");
 const Coach = require("./Coach.js");
 class WeekScheduler {
   #weekCategories = [];
@@ -18,8 +18,8 @@ class WeekScheduler {
     const sameCategoryArr = this.#weekCategories.filter(
       (category) => category === tempCategory
     );
-    MissionUtils.Console.print(this.#weekCategories);
-    MissionUtils.Console.print(sameCategoryArr);
+    Console.print(this.#weekCategories);
+    Console.print(sameCategoryArr);
     if (sameCategoryArr.length >= 2) {
       return true;
     }
@@ -48,11 +48,11 @@ class WeekScheduler {
       do {
         tempMenu = this.getMenu(category);
       } while (
-        coach.checkHaseSameMenu(tempMenu) ||
-        coach.checkCanEat(tempMenu)
+        this.#coaches[coach].checkHaseSameMenu(tempMenu) ||
+        this.#coaches[coach].checkCanEat(tempMenu)
       );
       //menu 에 push
-      coach.menu = tempMenu;
+      this.#coaches[coach].menu = tempMenu;
     });
   }
   set weekCategories(category) {
@@ -62,7 +62,7 @@ class WeekScheduler {
     return this.#weekCategories;
   }
   getCategory() {
-    const index = MissionUtils.Random.pickNumberInRange(0, 4);
+    const index = Random.pickNumberInRange(0, 4);
     return CATEGORY[index];
   }
 

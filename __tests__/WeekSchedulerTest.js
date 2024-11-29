@@ -21,7 +21,6 @@ describe("weekscheduler 테스트", () => {
       weekScheduler.weekCategories = tempCategory;
     }
 
-    MissionUtils.Console.print(weekScheduler.weekCategories);
     expect(CATEGORY.includes(weekScheduler.weekCategories[1])).toBeTruthy();
   });
 });

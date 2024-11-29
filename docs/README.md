@@ -15,7 +15,7 @@
 
 - 카테고리 랜덤으로 정하기
 
-  - const category = categories.get(Randoms.pickNumberInRange(1, 5)); 사용
+  - ✅ const category = categories.get(Randoms.pickNumberInRange(1, 5)); 사용
   - 만약 같은 카테고리가 3번 나오면 다시 돌려서 정하기
 
 - 메뉴 랜덤 정하기

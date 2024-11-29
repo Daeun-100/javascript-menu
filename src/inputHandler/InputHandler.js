@@ -44,7 +44,9 @@ class InputHandler {
       //input 가공
       const inputArr = input.split(",");
       //validate
-
+      if (!inputArr[0]) {
+        return [];
+      }
       //input값 리턴, 다른 class에서 받아서 사용
       return inputArr;
     } catch (e) {
@@ -55,7 +57,7 @@ class InputHandler {
   }
   static async getCantEat(coach) {
     try {
-      const input = await InputView.cantEat();
+      const input = await InputView.cantEat(coach);
       //input 가공
       const inputArr = input.split(",");
       //validate

@@ -1,12 +1,10 @@
-import InputHandler from "../inputHandler/InputHandler.js";
-
+const InputHandler = require("../inputHandler/InputHandler.js");
+const WeekScheduler = require("../WeekScheduler.js");
 export default class Controller {
-  #inputHandler;
-  constructor() {
-    this.#inputHandler = new InputHandler();
-  }
+  #coachWithCanEat = {};
+  constructor() {}
 
   async play() {
-    const input = await this.#inputHandler.getValidatedInput();
+    const coachNames = await InputHandler.getCoachNames();
   }
 }

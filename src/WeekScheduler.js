@@ -1,21 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { CATEGORY } = require("../src/Constants.js");
 const getMenuArr = require("./utils/getMenuArr.js");
+const Coach = require("./Coach.js");
 class WeekScheduler {
   #weekCategories = [];
-  #coachWithMenu = {};
-  //코치이름 : {월:,화:,수 :,...}
+  #coach = {};
+
   constructor(namesArr) {
     namesArr.forEach((name) => {
-      this.#coachWithMenu[name] = {
-        월: null,
-        화: null,
-        수: null,
-        목: null,
-        금: null,
-      };
+      this.#coach[name] = new Coach(name);
     });
   }
+
   checkHasSameTwoCategory(tempCategory) {
     const sameCategoryArr = this.#weekCategories.filter(
       (category) => category === tempCategory
@@ -27,12 +23,7 @@ class WeekScheduler {
     }
     return false;
   }
-  checkHaseSameMenu(menu, coach) {
-    const check = Object.keys(this.#coachWithMenu[coach]).some(
-      (key) => this.#coachWithMenu[coach][key] == menu
-    );
-    return check;
-  }
+  //카테고리 추천
   recommendCategory() {
     let tempCategory;
     do {
@@ -41,12 +32,18 @@ class WeekScheduler {
     // this.#weekCategories.push(tempCategory); 다른데서
     return tempCategory;
   }
-  recommendMenu(category, coach) {
+  //각 코치 메뉴 추천/ coach의 this.#menu에 저장
+  recommendMenu(category) {
     let tempMenu;
-    do {
-      tempMenu = this.getMenu(category);
-    } while (this.checkHaseSameMenu(tempMenu, coach));
-    return tempMenu;
+    Object.keys(this.#coach).forEach((coach) => {
+      do {
+        tempMenu = this.getMenu(category);
+      } while (
+        coach.checkHaseSameMenu(tempMenu) ||
+        coach.checkCanEat(tempMenu)
+      );
+      coach.menu = tempMenu;
+    });
   }
   set weekCategories(category) {
     this.#weekCategories.push(category);

@@ -12,6 +12,9 @@ class Coach {
   get name() {
     return this.#name;
   }
+  get menu() {
+    return this.#menu;
+  }
   checkHaseSameMenu(menu) {
     return this.#menu.includes(menu);
   }
@@ -20,6 +23,25 @@ class Coach {
   }
   checkCanEat(menu) {
     return this.#canEat.includes(menu);
+  }
+  toPrintString() {
+    const name = this.#name;
+    const menu = this.#menu;
+    const string =
+      "[" +
+      name +
+      " |" +
+      menu[0] +
+      " |" +
+      menu[1] +
+      " |" +
+      menu[2] +
+      " |" +
+      menu[3] +
+      " |" +
+      menu[4] +
+      "]";
+    return string;
   }
 }
 

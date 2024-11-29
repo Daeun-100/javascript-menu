@@ -4,12 +4,15 @@ const getMenuArr = require("./utils/getMenuArr.js");
 const Coach = require("./Coach.js");
 class WeekScheduler {
   #weekCategories = [];
-  #coach = {};
+  #coaches = {};
 
   constructor() {}
-  set coach(coach) {
+  set coaches(coach) {
     const name = coach.name;
-    this.#coach[name] = coach;
+    this.#coaches[name] = coach;
+  }
+  get coaches() {
+    return this.#coaches;
   }
   checkHasSameTwoCategory(tempCategory) {
     const sameCategoryArr = this.#weekCategories.filter(
@@ -41,7 +44,7 @@ class WeekScheduler {
   //각 코치 메뉴 추천/ coach의 this.#menu에 저장
   recommendMenu(category) {
     let tempMenu;
-    Object.keys(this.#coach).forEach((coach) => {
+    Object.keys(this.#coaches).forEach((coach) => {
       do {
         tempMenu = this.getMenu(category);
       } while (

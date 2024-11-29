@@ -1,24 +1,19 @@
-import Validate from "../validate/Validate.js";
-import InputView from "../View/InputView.js";
-export default class InputHandler {
-  #validate;
-  #inputView;
-  constructor() {
-    this.#validate = new Validate();
-    this.#inputView = new InputView();
-  }
+const InputView = require("../view/InputView.js");
+const Validate = require("../validate/Validate.js");
+class InputHandler {
+  constructor() {}
 
-  handleError(e, callback) {
+  async handleError(e, callback) {
     Console.print(e.message);
-    return callback();
+    return await callback();
   }
 
-  async getValidatedInput() {
+  static async getValidatedInput() {
     try {
-      const input = await this.#inputView.inputText();
+      // const input = await this.#inputView.inputText();
       //input 가공
       //validate
-      this.#validate.validateInput();
+      // this.#validate.validateInput();
 
       //input값 리턴, 다른 class에서 받아서 사용
       return input;
@@ -28,4 +23,51 @@ export default class InputHandler {
       return this.handleError(e, this.inputText.bind(this));
     }
   }
+  static async getCoachNames() {
+    try {
+      const input = await InputView.coachNames();
+      //input 가공
+      const inputArr = input.split(",");
+      //validate
+
+      //input값 리턴, 다른 class에서 받아서 사용
+      return inputArr;
+    } catch (e) {
+      //에러 발생시 다시 input
+      //this.inputText이름 바꾸기!!!
+      return this.handleError(e, this.getCoachNames.bind(this));
+    }
+  }
+  static async getCoachNames() {
+    try {
+      const input = await InputView.coachNames();
+      //input 가공
+      const inputArr = input.split(",");
+      //validate
+
+      //input값 리턴, 다른 class에서 받아서 사용
+      return inputArr;
+    } catch (e) {
+      //에러 발생시 다시 input
+      //this.inputText이름 바꾸기!!!
+      return this.handleError(e, this.getCoachNames.bind(this));
+    }
+  }
+  static async getCantEat(coach) {
+    try {
+      const input = await InputView.cantEat();
+      //input 가공
+      const inputArr = input.split(",");
+      //validate
+
+      //input값 리턴, 다른 class에서 받아서 사용
+      return inputArr;
+    } catch (e) {
+      //에러 발생시 다시 input
+      //this.inputText이름 바꾸기!!!
+      return this.handleError(e, this.getCantEat.bind(this));
+    }
+  }
 }
+
+module.exports = InputHandler;

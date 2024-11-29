@@ -18,7 +18,9 @@ describe("weekscheduler 테스트", () => {
   test("한주에 카테고리 2개 이상 중복 x", () => {
     for (let i = 0; i < 8; i++) {
       const tempCategory = weekScheduler.recommendCategory();
+      weekScheduler.weekCategories = tempCategory;
     }
+
     MissionUtils.Console.print(weekScheduler.weekCategories);
     expect(CATEGORY.includes(weekScheduler.weekCategories[1])).toBeTruthy();
   });

@@ -16,9 +16,9 @@
 - 카테고리 랜덤으로 정하기
 
   - ✅ const category = categories.get(Randoms.pickNumberInRange(1, 5)); 사용
-  - 만약 같은 카테고리가 3번 나오면 다시 돌려서 정하기
+  - ✅ 만약 같은 카테고리가 3번 나오면 다시 돌려서 정하기
 
-- 메뉴 랜덤 정하기
+- ✅ 메뉴 랜덤 정하기
   - const menu = Randoms.shuffle(menus)[0];
   - 카테고리에 포함되는 메뉴 목록은 문자열 배열 형태로 담아 준비한다. = sample을 가공
   - 추천할 수 없는 메뉴인 경우 다시 섞은 후 첫 번째 값을 사용해야 한다.

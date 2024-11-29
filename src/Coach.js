@@ -9,7 +9,9 @@ class Coach {
     //arr로 받음
     this.#canEat = canEat;
   }
-
+  get name() {
+    return this.#name;
+  }
   checkHaseSameMenu(menu) {
     return this.#menu.includes(menu);
   }

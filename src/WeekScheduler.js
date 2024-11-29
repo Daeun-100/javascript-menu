@@ -6,12 +6,11 @@ class WeekScheduler {
   #weekCategories = [];
   #coach = {};
 
-  constructor(namesArr) {
-    namesArr.forEach((name) => {
-      this.#coach[name] = new Coach(name);
-    });
+  constructor() {}
+  set coach(coach) {
+    const name = coach.name;
+    this.#coach[name] = coach;
   }
-
   checkHasSameTwoCategory(tempCategory) {
     const sameCategoryArr = this.#weekCategories.filter(
       (category) => category === tempCategory
@@ -22,6 +21,13 @@ class WeekScheduler {
       return true;
     }
     return false;
+  }
+  recommendFive() {
+    for (let i = 0; i < 5; i++) {
+      const category = this.recommendCategory();
+      this.recommendMenu(category);
+    }
+    //각 코치객체에 메뉴에 5개가 저장되어야함
   }
   //카테고리 추천
   recommendCategory() {
@@ -42,6 +48,7 @@ class WeekScheduler {
         coach.checkHaseSameMenu(tempMenu) ||
         coach.checkCanEat(tempMenu)
       );
+      //menu 에 push
       coach.menu = tempMenu;
     });
   }
